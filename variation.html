@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CVS Health — Session Transfer Demo</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="variation.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="cvs-logo"><span class="cvs-r">CVS</span><span class="cvs-h">health</span></div>
+        <span class="demo-badge">Session Transfer Demo</span>
+      </div>
+      <div class="step-meta">
+        <span class="step-counter" id="stepCounter">Step 1 of 8</span>
+        <span class="step-title" id="stepTitle">User enters username</span>
+      </div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </header>
+
+  <main>
+    <div class="stage">
+
+      <div class="col">
+        <div class="col-label"><span class="dot web"></span>Web Browser</div>
+        <div class="browser">
+          <div class="browser-chrome">
+            <div class="traffic"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span></div>
+            <div class="url-bar" id="urlBar">
+              <svg class="lock" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="8" rx="1.5" fill="#22c55e"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2" stroke="#22c55e" stroke-width="1.5" fill="none"/></svg>
+              cvs.com/account/login
+            </div>
+          </div>
+          <div class="browser-viewport" id="webScreen"></div>
+        </div>
+      </div>
+
+      <div class="col server-col">
+        <div class="col-label"><span class="dot srv"></span>Server</div>
+        <div class="server-log" id="serverLog">
+          <p class="srv-idle">Awaiting requests…</p>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col-label"><span class="dot app"></span>CVS App</div>
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="phone-inner">
+              <div class="notch"></div>
+              <div class="phone-screen" id="appScreen"></div>
+              <div class="home-bar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="controls">
+      <button class="ctrl secondary" id="btnPrev" onclick="prevStep()">&#8592; Prev</button>
+      <div class="dots" id="dots"></div>
+      <button class="ctrl primary" id="btnNext" onclick="nextStep()">Next &#8594;</button>
+    </div>
+  </footer>
+
+  <script src="variation.js"></script>
+</body>
+</html>

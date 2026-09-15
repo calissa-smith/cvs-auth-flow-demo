@@ -1,0 +1,297 @@
+/* Overrides the demo-badge color for this variation */
+.demo-badge {
+  background: rgba(0, 76, 151, 0.15);
+  color: #60a5fa;
+  border-color: rgba(0, 76, 151, 0.3);
+}
+
+/* Accent the "continue in app" option with blue instead of red */
+.opt-card.selected-blue {
+  border-color: #3b82f6;
+  background: #f0f7ff;
+}
+.opt-icon.blue { background: #3b82f6; color: #fff; font-size: .8rem; }
+.opt-arrow.blue { color: #3b82f6; }
+
+/* ── WEB: SESSION TRANSFER QR ── */
+.ws-transfer-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 20px;
+  padding: .3rem .85rem;
+  font-size: .72rem;
+  color: #1d4ed8;
+  font-weight: 600;
+  margin-bottom: .65rem;
+}
+
+.ws-transfer-tag svg { width: 13px; height: 13px; }
+
+/* ── WEB: HANDED OFF ── */
+.ws-handed-off {
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 430px;
+  background: #f8faff;
+  justify-content: center;
+  gap: .6rem;
+  text-align: center;
+}
+
+.handoff-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .5rem;
+}
+
+.handoff-web {
+  width: 38px;
+  height: 38px;
+  background: #e0e7ff;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.handoff-arrow {
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #60a5fa;
+  font-size: .85rem;
+}
+
+.handoff-phone {
+  width: 38px;
+  height: 38px;
+  background: var(--red);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 900;
+  font-size: .7rem;
+}
+
+.handoff-check {
+  width: 52px;
+  height: 52px;
+  background: #ecfdf5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto .35rem;
+  animation: popIn .4s cubic-bezier(.175,.885,.32,1.275);
+}
+
+.handoff-check svg { width: 26px; height: 26px; color: #10b981; }
+
+.ws-handed-off h2 { font-size: 1.15rem; font-weight: 700; color: #111827; }
+.ws-handed-off .sub { font-size: .78rem; color: #9ca3af; max-width: 260px; line-height: 1.5; }
+
+.handoff-info {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+  padding: .65rem 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  margin-top: .25rem;
+}
+
+.handoff-info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: .72rem;
+}
+
+.handoff-info-row .label { color: #9ca3af; }
+.handoff-info-row .val { color: #374151; font-weight: 500; }
+
+.close-hint {
+  font-size: .7rem;
+  color: #c0c9d8;
+  margin-top: .35rem;
+}
+
+/* ── APP: CONFIRM TRANSFER ── */
+.as-confirm-transfer {
+  flex: 1;
+  background: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+}
+
+.transfer-body {
+  flex: 1;
+  padding: 1.1rem .9rem .4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: .55rem;
+}
+
+.transfer-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.transfer-body h3 { font-size: .88rem; font-weight: 700; color: #111827; }
+.transfer-body p { font-size: .72rem; color: #6b7280; line-height: 1.5; }
+
+.transfer-from {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: .5rem .8rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .75rem;
+}
+
+.from-lock { color: #22c55e; font-size: .85rem; }
+.from-url { font-weight: 600; color: #111827; }
+.from-ok { margin-left: auto; font-size: .65rem; color: #22c55e; }
+
+.transfer-detail {
+  font-size: .65rem;
+  color: #9ca3af;
+  text-align: center;
+}
+
+/* ── APP: HOME (SESSION ACTIVE) ── */
+.as-home {
+  flex: 1;
+  background: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-topbar {
+  background: var(--red);
+  padding: .65rem .9rem .55rem;
+  flex-shrink: 0;
+}
+
+.home-topbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-logo { color: #fff; font-weight: 900; font-size: .9rem; }
+.home-logo span { font-weight: 400; opacity: .75; }
+
+.home-avatar-sm {
+  width: 26px;
+  height: 26px;
+  background: rgba(255,255,255,.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: .62rem;
+}
+
+.home-greeting {
+  color: rgba(255,255,255,.85);
+  font-size: .75rem;
+  margin-top: .25rem;
+}
+
+.session-banner {
+  background: #fff;
+  margin: .65rem .65rem 0;
+  border-radius: 9px;
+  padding: .55rem .75rem;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,.07);
+  animation: slideDown .4s ease-out;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-10px); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+.session-dot-green {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(16,185,129,.15);
+}
+
+.session-banner-text { font-size: .7rem; color: #374151; line-height: 1.4; flex: 1; }
+.session-banner-text strong { font-weight: 700; color: #111827; display: block; }
+
+.home-quick {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+  padding: .65rem .65rem 0;
+}
+
+.quick-tile {
+  background: #fff;
+  border-radius: 9px;
+  padding: .65rem .6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .3rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+
+.qt-icon { font-size: 1.15rem; }
+.qt-label { font-size: .68rem; font-weight: 600; color: #111827; }
+.qt-sub { font-size: .6rem; color: #9ca3af; }
+
+.home-footer-bar {
+  margin-top: auto;
+  padding: .5rem .65rem .65rem;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: .55rem;
+  color: #9ca3af;
+}
+
+.tab-item.active-tab { color: var(--red); }
+.tab-icon { font-size: .9rem; }
