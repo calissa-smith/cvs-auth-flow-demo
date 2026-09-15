@@ -3,73 +3,404 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CVS Health — Native App Web Auth Demo</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>CVS Health — Auth Flow Demos</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #CC0000;
+      --red-dk: #990000;
+      --bg: #0d0f14;
+      --sur: #161920;
+      --sur2: #1e2129;
+      --border: rgba(255,255,255,0.07);
+      --txt: #dde1ea;
+      --muted: #5a6070;
+      --c1: #CC0000;
+      --c2: #3b82f6;
+      --c3: #10b981;
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--sur);
+      border-bottom: 1px solid var(--border);
+      padding: .8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cvs-logo { font-size: 1.15rem; font-weight: 900; letter-spacing: -.3px; }
+    .cvs-r { color: var(--red); }
+    .cvs-h { color: var(--txt); margin-left: 1px; }
+    .header-tag { font-size: .72rem; color: var(--muted); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 760px;
+      margin: 5rem auto 3.5rem;
+      padding: 0 2rem;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(204,0,0,.1);
+      border: 1px solid rgba(204,0,0,.2);
+      color: #ff7070;
+      font-size: .72rem;
+      font-weight: 600;
+      padding: .3rem .85rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ff7070;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:.3; transform:scale(.7); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -.5px;
+      color: #eef0f5;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span { color: var(--red); }
+
+    .hero p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── GRID ── */
+    .grid {
+      max-width: 1100px;
+      margin: 0 auto 5rem;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--sur);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,.4);
+    }
+
+    .card-1:hover { border-color: rgba(204,0,0,.35); }
+    .card-2:hover { border-color: rgba(59,130,246,.35); }
+    .card-3:hover { border-color: rgba(16,185,129,.35); }
+
+    .card-accent {
+      height: 3px;
+      flex-shrink: 0;
+    }
+    .card-1 .card-accent { background: var(--c1); }
+    .card-2 .card-accent { background: var(--c2); }
+    .card-3 .card-accent { background: var(--c3); }
+
+    .card-body {
+      padding: 1.5rem 1.5rem 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* visual preview strip */
+    .card-visual {
+      height: 72px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .65rem;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .card-1 .card-visual { background: rgba(204,0,0,.08); }
+    .card-2 .card-visual { background: rgba(59,130,246,.08); }
+    .card-3 .card-visual { background: rgba(16,185,129,.08); }
+
+    .flow-arrow {
+      font-size: .9rem;
+      opacity: .45;
+    }
+
+    /* number + title */
+    .card-num {
+      font-size: .65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+    .card-1 .card-num { color: rgba(204,0,0,.7); }
+    .card-2 .card-num { color: rgba(59,130,246,.7); }
+    .card-3 .card-num { color: rgba(16,185,129,.7); }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #eef0f5;
+      margin-top: .2rem;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* tags */
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: auto;
+    }
+
+    .tag {
+      font-size: .65rem;
+      font-weight: 600;
+      padding: .2rem .6rem;
+      border-radius: 20px;
+      background: var(--sur2);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    /* footer */
+    .card-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-steps {
+      font-size: .72rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+    }
+
+    .steps-dots {
+      display: flex;
+      gap: 3px;
+    }
+
+    .steps-dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--sur2);
+      border: 1px solid var(--border);
+    }
+
+    .card-1 .steps-dots span { background: rgba(204,0,0,.35); border-color: rgba(204,0,0,.5); }
+    .card-2 .steps-dots span { background: rgba(59,130,246,.35); border-color: rgba(59,130,246,.5); }
+    .card-3 .steps-dots span { background: rgba(16,185,129,.35); border-color: rgba(16,185,129,.5); }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .8rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: .45rem 1rem;
+      border-radius: 7px;
+      transition: background .15s;
+    }
+
+    .card-1 .card-link { background: rgba(204,0,0,.15); color: #ff7070; }
+    .card-1 .card-link:hover { background: rgba(204,0,0,.25); }
+    .card-2 .card-link { background: rgba(59,130,246,.15); color: #93c5fd; }
+    .card-2 .card-link:hover { background: rgba(59,130,246,.25); }
+    .card-3 .card-link { background: rgba(16,185,129,.15); color: #6ee7b7; }
+    .card-3 .card-link:hover { background: rgba(16,185,129,.25); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; max-width: 480px; }
+      .hero { margin-top: 3rem; }
+    }
+  </style>
 </head>
 <body>
 
   <header>
-    <div class="header-inner">
-      <div class="brand">
-        <div class="cvs-logo"><span class="cvs-r">CVS</span><span class="cvs-h">health</span></div>
-        <span class="demo-badge">Auth Flow Demo</span>
-      </div>
-      <div class="step-meta">
-        <span class="step-counter" id="stepCounter">Step 1 of 9</span>
-        <span class="step-title" id="stepTitle">User enters username</span>
-      </div>
-    </div>
-    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="cvs-logo"><span class="cvs-r">CVS</span><span class="cvs-h">health</span></div>
+    <span class="header-tag">Identity &amp; Authentication &mdash; Flow Demos</span>
   </header>
 
-  <main>
-    <div class="stage">
+  <section class="hero">
+    <div class="hero-eyebrow">Interactive Prototypes</div>
+    <h1>CVS Health <span>Auth Flow</span> Demos</h1>
+    <p>Step-by-step interactive demos illustrating native app authentication, session transfer, and pharmacy counter verification flows using Passkeys and HYPR.</p>
+  </section>
 
-      <div class="col">
-        <div class="col-label"><span class="dot web"></span>Web Browser</div>
-        <div class="browser">
-          <div class="browser-chrome">
-            <div class="traffic"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span></div>
-            <div class="url-bar">
-              <svg class="lock" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="8" rx="1.5" fill="#22c55e"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2" stroke="#22c55e" stroke-width="1.5" fill="none"/></svg>
-              cvs.com/account/login
-            </div>
+  <div class="grid">
+
+    <!-- Demo 1 -->
+    <div class="card card-1">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-visual">
+          <span>&#127760;</span>
+          <span class="flow-arrow">&#8594;</span>
+          <span>&#128241;</span>
+          <span class="flow-arrow">&#8594;</span>
+          <span>&#10003;</span>
+        </div>
+        <div>
+          <div class="card-num">Demo 01</div>
+          <div class="card-title">Native App Web Authentication</div>
+        </div>
+        <p class="card-desc">User signs into a website using their mobile device as an authenticator. A QR code on the login page triggers the CVS app to complete a passkey challenge, returning an access token to the web session.</p>
+        <div class="card-tags">
+          <span class="tag">QR Code</span>
+          <span class="tag">Passkey</span>
+          <span class="tag">HYPR</span>
+          <span class="tag">Web Login</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-steps">
+          <div class="steps-dots">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
           </div>
-          <div class="browser-viewport" id="webScreen"></div>
+          9 steps
         </div>
+        <a href="web-auth.html" class="card-link">Open Demo &#8594;</a>
       </div>
-
-      <div class="col server-col">
-        <div class="col-label"><span class="dot srv"></span>Server</div>
-        <div class="server-log" id="serverLog">
-          <p class="srv-idle">Awaiting requests…</p>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="col-label"><span class="dot app"></span>CVS App</div>
-        <div class="phone-wrap">
-          <div class="phone">
-            <div class="phone-inner">
-              <div class="notch"></div>
-              <div class="phone-screen" id="appScreen"></div>
-              <div class="home-bar"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
-  </main>
+
+    <!-- Demo 2 -->
+    <div class="card card-2">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-visual">
+          <span>&#128187;</span>
+          <span class="flow-arrow">&#8594;</span>
+          <span>&#128260;</span>
+          <span class="flow-arrow">&#8594;</span>
+          <span>&#128241;</span>
+        </div>
+        <div>
+          <div class="card-num">Demo 02</div>
+          <div class="card-title">Web to App Session Transfer</div>
+        </div>
+        <p class="card-desc">User begins on the web and chooses to continue in the CVS app. After scanning a QR code and completing passkey auth, the browser session ends and the app becomes the active authenticated client.</p>
+        <div class="card-tags">
+          <span class="tag">Session Handoff</span>
+          <span class="tag">Passkey</span>
+          <span class="tag">HYPR</span>
+          <span class="tag">Deep Link</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-steps">
+          <div class="steps-dots">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          8 steps
+        </div>
+        <a href="variation.html" class="card-link">Open Demo &#8594;</a>
+      </div>
+    </div>
+
+    <!-- Demo 3 -->
+    <div class="card card-3">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-visual">
+          <span>&#127978;</span>
+          <span class="flow-arrow">&#8592;</span>
+          <span>&#128241;</span>
+          <span class="flow-arrow">&#8594;</span>
+          <span>&#128138;</span>
+        </div>
+        <div>
+          <div class="card-num">Demo 03</div>
+          <div class="card-title">Pharmacy Counter Verification</div>
+        </div>
+        <p class="card-desc">A QR code on the pharmacy POS terminal is scanned by the customer's CVS app. Passkey authentication verifies their identity in real time, and the pharmacist's screen updates to release waiting prescriptions.</p>
+        <div class="card-tags">
+          <span class="tag">POS Terminal</span>
+          <span class="tag">Passkey</span>
+          <span class="tag">HYPR</span>
+          <span class="tag">Prescription Pickup</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-steps">
+          <div class="steps-dots">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          5 steps
+        </div>
+        <a href="pharmacy.html" class="card-link">Open Demo &#8594;</a>
+      </div>
+    </div>
+
+  </div>
 
   <footer>
-    <div class="controls">
-      <button class="ctrl secondary" id="btnPrev" onclick="prevStep()">&#8592; Prev</button>
-      <div class="dots" id="dots"></div>
-      <button class="ctrl primary" id="btnNext" onclick="nextStep()">Next &#8594;</button>
-    </div>
+    &copy; 2026 CVS Health &mdash; Identity &amp; Authentication Team
   </footer>
 
-  <script src="app.js"></script>
 </body>
 </html>
