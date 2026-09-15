@@ -187,12 +187,20 @@ function wOptions() {
   return `<div class="ws">
     <div class="ws-mark">CVS</div>
     <h2>Choose sign-in method</h2>
-    <p class="sub" style="color:#10b981">&#10003; Passkey registered for this account</p>
+    <p class="sub" style="color:#10b981;margin-bottom:.75rem">&#10003; Passkey registered for this account</p>
     <div class="opt-card" style="cursor:default">
       <div class="opt-icon gray">&#128273;</div>
       <div>
         <div class="opt-label">Passkey (this device)</div>
         <div class="opt-sub">Use biometrics on this device</div>
+      </div>
+      <span class="opt-arrow">&#8250;</span>
+    </div>
+    <div class="opt-card" style="cursor:default">
+      <div class="opt-icon gray">&#128233;</div>
+      <div>
+        <div class="opt-label">Email or SMS OTP</div>
+        <div class="opt-sub">Send a one-time code to your email or phone</div>
       </div>
       <span class="opt-arrow">&#8250;</span>
     </div>
