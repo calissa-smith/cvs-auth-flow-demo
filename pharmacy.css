@@ -1,0 +1,559 @@
+/* ── HEADER BADGE ── */
+.pharm-badge {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+/* ── POS COLUMN DOT ── */
+.dot.pos-dot { background: #10b981; }
+
+/* ── TERMINAL MOCKUP ── */
+.terminal-wrap { flex: 1; display: flex; flex-direction: column; }
+
+.terminal {
+  flex: 1;
+  background: #252525;
+  border-radius: 14px;
+  padding: 10px 10px 0;
+  box-shadow: 0 12px 48px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-screen {
+  flex: 1;
+  background: #fff;
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 460px;
+}
+
+.terminal-base {
+  height: 28px;
+  background: #1a1a1a;
+  border-radius: 0 0 8px 8px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.t-light {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.t-light.green { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
+.t-light.amber { background: #f59e0b; }
+.t-light.amber.blink { animation: amberBlink 1s ease-in-out infinite; }
+@keyframes amberBlink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+.t-brand { font-size: .55rem; color: rgba(255,255,255,.3); letter-spacing: .04em; font-family: 'Segoe UI', sans-serif; margin-left: 4px; }
+
+/* ══════════════════════════════
+   POS SCREENS
+══════════════════════════════ */
+
+/* Shared POS header */
+.pos-hdr {
+  background: var(--red);
+  padding: .65rem .9rem .55rem;
+  flex-shrink: 0;
+}
+.pos-hdr-row { display: flex; align-items: center; justify-content: space-between; }
+.pos-hdr-logo { color: #fff; font-weight: 900; font-size: .95rem; letter-spacing: -.2px; }
+.pos-hdr-logo span { font-weight: 400; font-size: .75rem; opacity: .8; margin-left: 2px; }
+.pos-store { color: rgba(255,255,255,.7); font-size: .62rem; margin-top: .15rem; }
+.pos-terminal-id { color: rgba(255,255,255,.45); font-size: .58rem; font-family: monospace; }
+
+/* ── POS: Pickup QR ── */
+.pos-pickup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: .75rem .9rem 1rem;
+  gap: .5rem;
+}
+
+.pos-rx-card {
+  width: 100%;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: .55rem .8rem;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.pos-rx-icon {
+  width: 32px;
+  height: 32px;
+  background: #fee2e2;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .95rem;
+  flex-shrink: 0;
+}
+
+.pos-rx-name { font-size: .78rem; font-weight: 700; color: #111827; }
+.pos-rx-sub  { font-size: .65rem; color: #9ca3af; margin-top: .05rem; }
+.pos-rx-count { margin-left: auto; background: var(--red); color: #fff; font-size: .65rem; font-weight: 700; padding: .2rem .5rem; border-radius: 12px; }
+
+.pos-divider {
+  width: 100%;
+  height: 1px;
+  background: #e5e7eb;
+  margin: .15rem 0;
+}
+
+.pos-scan-label {
+  font-size: .72rem;
+  font-weight: 600;
+  color: #374151;
+  text-align: center;
+}
+
+.pos-qr-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem;
+  border: 2px dashed #d1d5db;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.pos-qr-instruction {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .65rem;
+  color: #9ca3af;
+}
+
+.pos-qr-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  animation: pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.pos-alt {
+  font-size: .6rem;
+  color: #c0c9d8;
+  text-align: center;
+}
+
+/* ── POS: Waiting ── */
+.pos-waiting {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .85rem;
+  padding: 1.5rem .9rem;
+  text-align: center;
+}
+
+.pos-wait-ring {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid #e5e7eb;
+  border-top-color: var(--red);
+  animation: spin .9s linear infinite;
+  flex-shrink: 0;
+}
+
+.pos-waiting h3 { font-size: .88rem; font-weight: 700; color: #111827; }
+.pos-waiting p  { font-size: .72rem; color: #9ca3af; line-height: 1.5; }
+
+.pos-session-tag {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  padding: .35rem .75rem;
+  font-size: .65rem;
+  color: #166534;
+  font-family: monospace;
+}
+
+/* ── POS: Authenticating ── */
+.pos-authing {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  padding: 1.5rem .9rem;
+  text-align: center;
+  background: #fafafa;
+}
+
+.pos-authing h3 { font-size: .88rem; font-weight: 700; color: #111827; }
+.pos-authing p  { font-size: .72rem; color: #9ca3af; }
+
+.pos-auth-steps {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  width: 100%;
+  margin-top: .25rem;
+}
+
+.pos-auth-step {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .4rem .65rem;
+  border-radius: 6px;
+  font-size: .72rem;
+}
+
+.pos-auth-step.done  { background: #f0fdf4; color: #166534; }
+.pos-auth-step.active{ background: #eff6ff; color: #1d4ed8; }
+.pos-auth-step.wait  { color: #9ca3af; }
+
+.step-check { color: #10b981; font-size: .85rem; }
+.step-spin  { width: 12px; height: 12px; border: 2px solid #bfdbfe; border-top-color: #3b82f6; border-radius: 50%; animation: spin .7s linear infinite; flex-shrink: 0; }
+.step-dot   { width: 8px; height: 8px; border-radius: 50%; background: #e5e7eb; flex-shrink: 0; }
+
+/* ── POS: Verified ── */
+.pos-verified-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.pos-verified-hdr {
+  background: #065f46;
+  padding: .65rem .9rem;
+  flex-shrink: 0;
+}
+
+.pos-verified-hdr-row { display: flex; align-items: center; justify-content: space-between; }
+.pos-verified-logo { color: #fff; font-weight: 900; font-size: .95rem; }
+.pos-verified-logo span { font-weight: 400; font-size: .75rem; opacity: .8; margin-left: 2px; }
+.pos-verified-sub { color: rgba(255,255,255,.65); font-size: .62rem; margin-top: .15rem; }
+.pos-verified-badge { background: rgba(255,255,255,.15); color: #fff; font-size: .62rem; font-weight: 600; padding: .15rem .5rem; border-radius: 10px; display: flex; align-items: center; gap: .3rem; }
+
+.pos-verified-body {
+  flex: 1;
+  padding: .75rem .9rem;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+
+.pos-customer-card {
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  border-radius: 9px;
+  padding: .65rem .85rem;
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  animation: popIn .35s cubic-bezier(.175,.885,.32,1.275);
+}
+
+.pos-cust-avatar {
+  width: 38px;
+  height: 38px;
+  background: #065f46;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 700;
+  font-size: .82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pos-cust-name { font-size: .82rem; font-weight: 700; color: #065f46; }
+.pos-cust-sub  { font-size: .65rem; color: #166534; margin-top: .05rem; }
+
+.pos-rx-list-hdr {
+  font-size: .68rem;
+  font-weight: 700;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.pos-rx-item {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+  padding: .5rem .75rem;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  animation: slideIn .3s ease-out;
+}
+
+.pos-rx-item:nth-child(2) { animation-delay: .1s; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.pos-rx-pill-icon { font-size: .9rem; }
+.pos-rx-drug { font-size: .75rem; font-weight: 600; color: #111827; }
+.pos-rx-detail { font-size: .62rem; color: #9ca3af; margin-top: .05rem; }
+.pos-rx-ready { margin-left: auto; background: #dcfce7; color: #166534; font-size: .62rem; font-weight: 600; padding: .15rem .5rem; border-radius: 10px; }
+
+.pos-action-bar {
+  margin-top: auto;
+  background: #065f46;
+  color: #fff;
+  padding: .65rem .9rem;
+  text-align: center;
+  font-size: .75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════
+   APP SCREENS
+══════════════════════════════ */
+
+/* Scanner */
+.as-scanner {
+  flex: 1;
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Simulated camera grain */
+.as-scanner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: .4;
+  pointer-events: none;
+}
+
+.scan-frame {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.scan-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: #22c55e;
+  border-style: solid;
+}
+.scan-corner.tl { top: 0; left: 0; border-width: 3px 0 0 3px; }
+.scan-corner.tr { top: 0; right: 0; border-width: 3px 3px 0 0; }
+.scan-corner.bl { bottom: 0; left: 0; border-width: 0 0 3px 3px; }
+.scan-corner.br { bottom: 0; right: 0; border-width: 0 3px 3px 0; }
+
+.scan-line {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: linear-gradient(to right, transparent 0%, #22c55e 30%, #22c55e 70%, transparent 100%);
+  box-shadow: 0 0 8px #22c55e;
+  animation: scanAnim 1.8s ease-in-out infinite;
+}
+
+@keyframes scanAnim {
+  0%   { top: 10px; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 136px; opacity: 0; }
+}
+
+/* Faint QR inside scanner to show detection */
+.scan-qr-ghost {
+  position: absolute;
+  inset: 16px;
+  opacity: .12;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.as-scanner h3 { font-size: .85rem; font-weight: 600; z-index: 1; }
+.as-scanner p { font-size: .7rem; opacity: .5; z-index: 1; }
+
+.scan-cvs-logo {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: .65rem;
+  font-weight: 900;
+  color: rgba(255,255,255,.3);
+  letter-spacing: .04em;
+}
+
+/* Pharmacy confirm */
+.as-pharm-confirm {
+  flex: 1;
+  background: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+}
+
+.pharm-topbar {
+  background: var(--red);
+  padding: .65rem .9rem .55rem;
+  flex-shrink: 0;
+}
+
+.pharm-topbar-row { display: flex; align-items: center; justify-content: space-between; }
+.pharm-logo { color: #fff; font-weight: 900; font-size: .88rem; }
+.pharm-logo-sub { font-weight: 400; opacity: .75; font-size: .75rem; margin-left: 2px; }
+.pharm-topbar-icon { color: rgba(255,255,255,.6); font-size: .9rem; }
+.pharm-store-tag { color: rgba(255,255,255,.65); font-size: .6rem; margin-top: .15rem; }
+
+.pharm-confirm-body {
+  flex: 1;
+  padding: 1rem .9rem .4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: .55rem;
+}
+
+.pharm-counter-icon {
+  width: 50px;
+  height: 50px;
+  background: #fee2e2;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.pharm-confirm-body h3 { font-size: .88rem; font-weight: 700; color: #111827; }
+.pharm-confirm-body p  { font-size: .72rem; color: #6b7280; line-height: 1.5; }
+
+.pharm-store-badge {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+  padding: .45rem .8rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .72rem;
+}
+
+.pharm-store-badge .badge-icon { font-size: .85rem; }
+.pharm-store-name { font-weight: 600; color: #111827; }
+.pharm-store-addr { font-size: .62rem; color: #9ca3af; margin-top: .02rem; }
+.pharm-terminal-tag { margin-left: auto; font-size: .6rem; color: #9ca3af; font-family: monospace; }
+
+.pharm-rx-preview {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 7px;
+  padding: .4rem .75rem;
+  width: 100%;
+  font-size: .68rem;
+  color: #991b1b;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+/* App pharmacy success */
+.as-pharm-success {
+  flex: 1;
+  background: linear-gradient(160deg, #052e16 0%, #064e3b 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: .75rem;
+  text-align: center;
+  padding: 1.25rem;
+}
+
+.pharm-success-ring {
+  width: 60px;
+  height: 60px;
+  background: rgba(255,255,255,.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: popIn .4s cubic-bezier(.175,.885,.32,1.275);
+}
+
+.pharm-success-ring svg { width: 30px; height: 30px; }
+
+.as-pharm-success h3 { font-size: .92rem; font-weight: 700; }
+.as-pharm-success p  { font-size: .72rem; opacity: .65; }
+
+.pharm-success-card {
+  background: rgba(255,255,255,.08);
+  border-radius: 9px;
+  padding: .6rem .85rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  margin-top: .15rem;
+  text-align: left;
+}
+
+.pharm-sc-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: .7rem;
+}
+
+.pharm-sc-row .k { opacity: .5; }
+.pharm-sc-row .v { font-weight: 600; }
+
+.pharm-extra-care {
+  background: rgba(255,255,255,.06);
+  border-radius: 7px;
+  padding: .4rem .75rem;
+  font-size: .65rem;
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: .1rem;
+}
+
+.ec-star { color: #fbbf24; font-size: .75rem; }
